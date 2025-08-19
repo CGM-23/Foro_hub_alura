@@ -47,3 +47,74 @@ spring:
 server:
   port: 8080
 ```
+## 4) Uso con Postman (endpoints principales)
+### 4.1 Registrar usuario (para poder loguear)
+
+```bash
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+  "nombre": "nombre",
+  "email": "nombre@test.com",
+  "contrasena": "12345678"
+}
+```
+4.2 Login (obtener JWT)
+```bash
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "claudio@test.com",
+  "contrasena": "12345678"
+}
+```
+```makefile
+Authorization: Bearer <access_token>
+```
+4.3 Tópicos (CRUD)
+Crear
+```bash
+POST http://localhost:8080/topicos
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "titulo": "Error al levantar Spring Boot",
+  "mensaje": "Failed to start bean ...",
+  "autorId": 1,
+  "cursoId": 2
+}
+
+```
+Listar (paginado + filtros + orden)
+```bash
+GET  http://localhost:8080/topicos?page=0&size=10&sort=fechaCreacion,asc
+GET  http://localhost:8080/topicos?curso=Spring Boot
+GET  http://localhost:8080/topicos?anio=2025
+GET  http://localhost:8080/topicos?curso=Spring Boot&anio=2025
+(agrega Authorization: Bearer <token>)
+```
+Detalles
+```bash
+GET http://localhost:8080/topicos/3
+Authorization: Bearer <token>
+```
+Actualizar
+```bash
+PUT http://localhost:8080/topicos/3
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "titulo": "Título actualizado",
+  "estado": "CLOSED"
+}
+```
+
+Eliminar
+```bash
+DELETE http://localhost:8080/topicos/3
+Authorization: Bearer <token>
+```
