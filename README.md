@@ -66,7 +66,7 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "email": "claudio@test.com",
+  "email": "test@test.com",
   "contrasena": "12345678"
 }
 ```
